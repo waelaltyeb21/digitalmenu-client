@@ -1,0 +1,62 @@
+import { useContext, useRef } from "react";
+import { OrdApi } from "../../Context/OrdersApi";
+
+const DishCard = ({ dish }) => {
+  console.log(dish)
+  const orderRef = useRef();
+  const {
+    orders,
+    createOrder,
+    deleteOrder,
+    increaseQuantity,
+    decreaseQuantity,
+  } = useContext(OrdApi);
+  const CreateNewOrder = (order) => {
+    orderRef.current.classList.add("selected");
+    createOrder(order);
+    // const orderCheck = orders.find((ord) => ord.name == order.name);
+    // console.log(orderCheck);
+  };
+  const RemoveOrder = (order) => {
+    orderRef.current.classList.remove("selected");
+    deleteOrder(order.id);
+    console.log(orders);
+  };
+  return (
+    <div
+      className={`DishCard flex flex-col bg-slate-200 m-2 p-2 rounded-md`}
+      ref={orderRef}
+    >
+      <div className="box1 flex justify-between items-center">
+        <h1 className="text-2xl font-medium">{dish.name.ar}</h1>
+        <button
+          onClick={() => {
+            orderRef.current.classList.contains("selected")
+              ? RemoveOrder(dish)
+              : CreateNewOrder(dish);
+          }}
+          disabled={!dish.active}
+          className={`${dish.active ? "bg-slate-800 text-slate-300" : "bg-red-400 text-slate-300"} text-xl px-4 rounded`}
+        >
+          اختيار
+        </button>
+      </div>
+      <div className="box2 flex justify-between items-center">
+        <div
+          className={`stack ${
+            dish.active ? "bg-green-400" : "bg-red-400"
+          } text-slate-100 px-2 rounded-md mt-1`}
+        >
+          {dish.active ? "متوفر" : "غير متوفر حاليا"}
+        </div>
+        <div className="price font-semibold">
+          <div className="">
+            2500 <span>ج.س</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DishCard;
