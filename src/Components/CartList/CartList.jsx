@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import CartCard from "../CartCard/CartCard";
 import { OrdApi } from "../../Context/OrdersApi";
 import OverlayButton from "../OverlayButton/OverlayButton";
 import { Lang } from "../../Context/LangApi";
-import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
 const CartList = () => {
@@ -11,8 +10,8 @@ const CartList = () => {
     useContext(OrdApi);
   const { lang } = useContext(Lang);
   return (
-    <div className="Cart mb-32">
-      <header className="my-4 flex justify-between items-center pb-4 px-2 border-b-2 border-dashed border-slate-900">
+    <div className="Cart dark:bg-slate-800 dark:text-slate-200 h-dvh">
+      <header className="py-4 flex justify-between items-center pb-4 px-2 border-b-2 border-dashed border-slate-900 dark:border-slate-400 dark:text-slate-100">
         <h1 className="text-3xl text-center">
           {lang == "ar" ? "الطلبات" : "Orders"}
         </h1>
@@ -46,11 +45,13 @@ const CartList = () => {
           ))
         )}
         {/* -------------------------------------------- */}
-        <OverlayButton
-          linkTo="/invoice"
-          text={lang == "ar" ? "عرض الفاتورة" : "Invoice"}
-          style={"w-full mx-auto bg-slate-800 text-xl"}
-        />
+        <OverlayButton>
+          <Button
+            linkTo="/invoice"
+            text={lang == "ar" ? "عرض الفاتورة" : "Invoice"}
+            btnStyle={"w-full mx-auto bg-slate-800 text-xl"}
+          />
+        </OverlayButton>
       </div>
     </div>
   );

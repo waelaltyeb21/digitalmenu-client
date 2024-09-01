@@ -9,6 +9,7 @@ html,
 body {
   font-family: "Tajawal", sans-serif !important;
   overflow-x: hidden !important;
+  transition: all 0.3s ease-in-out;
 }
 
 /* .Categories::-webkit-scrollbar {
@@ -20,11 +21,11 @@ body {
 }
 
 .Categories .category {
-  @apply px-4 py-2 text-slate-100 outline-2 outline-dashed outline-offset-2 outline-slate-900 rounded-3xl;
+  @apply px-4 py-2 bg-slate-500 dark:bg-slate-800 text-slate-100 font-semibold outline-2 outline-dashed outline-offset-2 outline-slate-900 dark:outline-slate-300 rounded-3xl transition-all duration-300 ease-in-out;
 }
 
 .Categories .category.selected {
-  @apply bg-slate-800;
+  @apply bg-slate-700 dark:bg-slate-500 dark:text-slate-200;
 }
 
 .DishCard.selected {

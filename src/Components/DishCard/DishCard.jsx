@@ -22,36 +22,33 @@ const DishCard = ({ dish, lang }) => {
     <div
       ref={dishRef}
       id={`dish${dish._id}`}
-      className={`DishCard flex justify-between items-center shadow-xl shadow-slate-300 mx-2 mb-4 p-2 rounded-md outline-2 outline-dashed outline-offset-2 ${
-        dish.active
-          ? "outline-slate-500"
-          : "outline-red-600 text-red-600 opacity-75"
-      } ${orders.find((order) => order._id == dish._id) ? "selected" : ""}`}
+      className={`DishCard flex justify-between items-center shadow-md shadow-slate-300 dark:shadow-none dark:text-slate-200 mx-2 mb-4 p-2 rounded-md outline-2 outline-dashed outline-offset-2 outline-slate-500 dark:outline-slate-400 ${orders.find((order) => order._id == dish._id) ? "selected" : ""}`}
     >
       <div className="box1 mx-0.5">
         <h1 className="text-2xl font-medium">
           {lang == "ar" ? dish.name.ar : dish.name.en}
           {/* هوت دوق بالجبنة الفرنسية السودانية اللذيذة */}
         </h1>
-        <span className={`${dish.active ? "hidden" : "block text-red-600"}`}>
+        <span className={`${dish.active ? "hidden" : "block dark:text-slate-300"}`}>
           {lang == "ar" ? "غير متوفر حاليا *" : "Out Of Stack"}
         </span>
       </div>
       <div className={`box2 mx-0.5 text-center`}>
         <div className={`font-semibold text-xl`}>{dish.price}</div>
-        <button
-          onClick={(event) => OrderToggel(dish, event)}
-          disabled={!dish.active}
-          className="bg-slate-300 text-slate-950 text-xl px-4 rounded"
-        >
-          {orders.find((order) => order._id == dish._id)
-            ? lang == "ar"
-              ? "الغاء"
-              : "cancel"
-            : lang == "ar"
-            ? "اختيار"
-            : "select"}
-        </button>
+        {dish.active ? (
+          <button
+            onClick={(event) => OrderToggel(dish, event)}
+            className="bg-slate-300 dark:text-slate-100 text-slate-800 dark:bg-slate-500 text-xl capitalize px-4 rounded"
+          >
+            {orders.find((order) => order._id == dish._id)
+              ? lang == "ar"
+                ? "الغاء"
+                : "cancel"
+              : lang == "ar"
+              ? "اختيار"
+              : "select"}
+          </button>
+        ) : null}
       </div>
     </div>
   );
